@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public char[] BestGenes { get; private set; }
 
         public float MutationRate;
+        private List<DNA<char>> newPopulation;
         private Random random;
         private float fitnessSum;
         private string frase;
@@ -22,7 +23,8 @@ namespace ConsoleApp1
             var populationSize = 1200;
             Generation = 1;
             MutationRate = 0.01f;
-            Population = new List<DNA<char>>();
+            Population = new List<DNA<char>>(populationSize);
+            newPopulation = new List<DNA<char>>(populationSize);
             this.random = random;
             BestGenes = new char[frase.Length];
 
@@ -53,6 +55,8 @@ namespace ConsoleApp1
 
             score /= frase.Length;
 
+            score = (MathF.Pow(5, score) - 1) / (5 -1);
+
             return score;
         }
 
@@ -64,8 +68,8 @@ namespace ConsoleApp1
             }
 
             CalculateFitness();
-
-            List<DNA<char>> newPopulation = new List<DNA<char>>();
+            
+            newPopulation.Clear();
 
             for (int i = 0; i < Population.Count; i++)
             {
@@ -79,7 +83,9 @@ namespace ConsoleApp1
                 newPopulation.Add(child);
             }
 
+            var tmpList = Population;
             Population = newPopulation;
+            newPopulation = tmpList;
 
             Generation++;
         }
