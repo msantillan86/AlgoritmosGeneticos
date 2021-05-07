@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
-    public class GeneticAlgoritm
+    public class CustomGeneticAlgoritm
     {
         public List<DNA<char>> Population { get; private set; }
         public int Generation { get; private set; }
@@ -17,12 +17,12 @@ namespace ConsoleApp1
         private string frase;
         private string validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.|!#$%&/()=? ";
 
-        public GeneticAlgoritm(string frase, Random random)
+        public CustomGeneticAlgoritm(string frase, Random random)
         {
             this.frase = frase;
-            var populationSize = 1200;
-            Generation = 1;
-            MutationRate = 0.01f;
+            var populationSize = 1500;
+            Generation = 0;
+            MutationRate = 0.02f;
             Population = new List<DNA<char>>(populationSize);
             newPopulation = new List<DNA<char>>(populationSize);
             this.random = random;
