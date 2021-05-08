@@ -8,7 +8,7 @@ namespace MonkeysAG
 {
     public class MonkeyParameters
     {
-        public enum SolverSelection { Elite, Tournament, Roulette };
+        public enum SolverSelection { Elite, Tournament, Roulette, StochasticUniversalSampling };
         public int Generations { get; set; }
         public int Population { get; set; }
         public SolverSelection Selection { get; set; }

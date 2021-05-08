@@ -20,6 +20,7 @@ namespace MonkeysAG
                 MonkeyParameters.SolverSelection.Elite => new EliteSelection(),
                 MonkeyParameters.SolverSelection.Tournament => new TournamentSelection(),
                 MonkeyParameters.SolverSelection.Roulette => new RouletteWheelSelection(),
+                MonkeyParameters.SolverSelection.StochasticUniversalSampling => new StochasticUniversalSamplingSelection(),
                 _ => throw new NotImplementedException()
             };
 
