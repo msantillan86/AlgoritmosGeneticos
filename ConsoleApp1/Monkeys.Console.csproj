@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GeneticSharp" Version="2.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MonkeysAG\MonkeysAG.csproj" />
   </ItemGroup>
 
