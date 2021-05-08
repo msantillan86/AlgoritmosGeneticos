@@ -1,12 +1,7 @@
 ﻿using GeneticSharp.Domain.Chromosomes;
 using GeneticSharp.Domain.Randomizations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace MonkeysAG
 {
     public class MonkeyChromosome : ChromosomeBase
     {
@@ -22,7 +17,7 @@ namespace ConsoleApp1
         }
 
         public override IChromosome CreateNew() => new MonkeyChromosome(_length);
-        
+
 
         public override Gene GenerateGene(int geneIndex)
         {
