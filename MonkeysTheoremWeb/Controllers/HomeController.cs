@@ -66,7 +66,7 @@ namespace MonkeysTheoremWeb.Controllers
 
                 ga.Start();
 
-                return View();
+                return View("GeneticAlgorithm", model);
             }
             else
             {
