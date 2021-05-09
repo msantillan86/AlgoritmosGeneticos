@@ -1,0 +1,14 @@
+﻿<h3>Monkeys</h3>
+<div>
+    <p>Ingrese Frase</p>
+    <input type="text" style="width: 100%" @bind-value="@frase" />
+</div>
+<div>
+    <button class="btn btn-primary mt-1" @onclick="CorrerAG">Correr</button>
+</div>
+<ul>
+    @foreach (var item in generaciones)
+    {
+        <li>@item</li>
+    }
+</ul>
