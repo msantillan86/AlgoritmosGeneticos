@@ -1,7 +1,79 @@
-﻿@{
+﻿@model MonkeysTheoremWeb.Models.GeneticAlgorithmViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenido!</h1>    
+<div class="col-md-6 p-0">
+    <div class="card">
+        <div class="login-box">
+            <div class="login-snip">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Ingrese la Frase</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Configurar</label>
+                <div class="login-space">
+                    <div class="login">
+                        <br /><br />
+                        <div class="group">
+                            <label for="user" class="label">Frase a reconstruir</label>
+                            <input id="user" type="text" class="input" placeholder="Ingrese su frase">
+                        </div>
+                        @*<div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>*@
+                        <div class="group">
+                            <input type="submit" class="button" value="Reconstruir">
+                        </div>
+                        <div class="hr"></div>
+                        <div class="group">
+                            <label for="pass" class="label">Frase Reconstruida</label>
+                            <input id="pass" type="password" class="input" placeholder="Aquí aparecerá su frase">
+                        </div>
+
+                    </div>
+                    <div class="sign-up-form">
+                        <br /><br />
+                              <form asp-action="Calculate">
+                                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                  <div class="group">
+                                      <label for="user" asp-for="Phrase" class="label">Phrase</label>
+                                      <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Phrase">
+                                      <span asp-validation-for="Phrase" class="text-danger"></span>
+                                  </div>
+                                  <br />
+                                  <div class="group">
+                                      <div class="group" style="display:inline-block; margin-left:20px">
+                                          <label for="pass" asp-validation-for="Population" style="width:260px" class="label">Population</label>
+                                          <input id="pass" asp-for="Population" style="width:260px" type="text" class="input chico" placeholder="Population">
+                                          <span asp-validation-for="Population" class="text-danger"></span>
+                                      </div>
+                                      <div class="group" style="display:inline-block; margin-left:20px">
+                                          <label for="pass" asp-for="Generations" style="width:260px" class="label">Generations</label>
+                                          <input id="pass" asp-for="Generations" style="width:260px" type="text" class="input chico" placeholder="Generations">
+                                          <span asp-validation-for="Generations" class="text-danger"></span>
+                                      </div>
+                                      <div class="group" style="display:inline-block; margin-left:20px">
+                                          <label for="pass" asp-for="MutationProbability" style="width:260px" class="label">MutationProbability</label>
+                                          <input id="pass" asp-for="MutationProbability" style="width:260px" type="text" class="input" placeholder="MutationProbability">
+                                          <span asp-validation-for="MutationProbability" class="text-danger"></span>
+                                      </div>
+                                      <div class="group" style="display:inline-block; margin-left:20px">
+                                          <label for="pass" asp-for="SolverSelection" style="width:260px" class="label">SolverSelection</label>
+                                          <input id="pass" asp-for="SolverSelection" style="width:260px" type="text" class="input" placeholder="SolverSelection">
+                                          <span asp-validation-for="SolverSelection" class="text-danger"></span>
+                                      </div>
+                                  </div>
+                                  <div class="group">
+                                      <input type="submit" class="button" value="Reconstruir">
+                                  </div>
+                              </form>
+
+                        <hr style="background:rgba(255, 255, 255, .2)"/>
+                        <div class="group">
+                            <label for="pass" class="label">Frase Reconstruida</label>
+                            <input id="pass" type="text" class="input" placeholder="Aquí aparecerá su frase">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
