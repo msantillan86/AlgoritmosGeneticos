@@ -14,9 +14,8 @@
                         <br /><br />
                         <div class="group">
                             <label for="user" class="label">Frase a reconstruir</label>
-                            <input id="user" type="text" class="input" placeholder="Ingrese una frase a reproducir">
+                            <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
                         </div>
-                        @*<div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>*@
                         <div class="group">
                             <input type="submit" class="button" value="Reconstruir">
                         </div>
@@ -24,9 +23,20 @@
                         <div class="group">
                             <label for="pass" class="label">Frase Reconstruida</label>
                             <select id="pass" type="text" class="select">
-                                <option value="0" selected>Aquí aparecerá su frase</option>
+                                @if (Model != null)
+                                {
+                                    for(int i = Model.Result.Count(); i != 0; i--)
+                                    {
+                                        var elem = Model.Result[i-1];
+                                        <option value="0">@string.Format("Frase: {0} - Generaciones: {1} - Fitness: {2}", elem.PhraseResult, elem.Generation, elem.Fitness)</option>
+                                    }
+                                }
+                                else
+                                {
+                                   <option value="0" selected>Aquí aparecerá su frase</option>
+                                }
                             </select>
-                            </div>
+                        </div>
 
                         </div>
                     <div class="sign-up-form">
@@ -61,9 +71,9 @@
                                           <span asp-validation-for="SolverSelection" class="text-danger"></span>
                                       </div>
                                           <div class="group" style="display:inline-block; margin-left:20px">
-                                              <label for="pass" asp-for="MutationProbability" class="label chico">Probabilidad de cruzamiento</label>
-                                              <input id="pass" asp-for="MutationProbability" value="0,8" type="text" class="input chico" placeholder="Ingrese la Probabilidad de cruzamiento">
-                                              <span asp-validation-for="MutationProbability" class="text-danger"></span>
+                                              <label for="pass" asp-for="CrossoverProbability" class="label chico">Probabilidad de cruzamiento</label>
+                                              <input id="pass" asp-for="CrossoverProbability" value="0,8" type="text" class="input chico" placeholder="Ingrese la Probabilidad de cruzamiento">
+                                              <span asp-validation-for="CrossoverProbability" class="text-danger"></span>
                                           </div>
                                           <div class="group" style="display:inline-block; margin-left:20px">
                                               <label for="pass" asp-for="MutationProbability" class="label chico">Probabilidad de cruzamiento</label>
@@ -80,7 +90,18 @@
                         <div class="group">
                             <label for="pass" class="label">Frase Reconstruida</label>
                             <select id="pass" type="text" class="select">
-                                <option value="0" selected>Aquí aparecerá su frase</option>
+                                @if (Model != null)
+                                {
+                                    for (int i = Model.Result.Count(); i != 0; i--)
+                                    {
+                                        var elem = Model.Result[i - 1];
+                                        <option value="0">@string.Format("Frase: {0} - Generaciones: {1} - Fitness: {2}", elem.PhraseResult, elem.Generation, elem.Fitness)</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="0" selected>Aquí aparecerá su frase</option>
+                                }
                             </select>
                         </div>
 
