@@ -40,7 +40,6 @@ namespace MonkeysTheoremWeb.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public IActionResult Calculate(GeneticAlgorithmViewModel model)
         {
             if (ModelState.IsValid)
@@ -66,11 +65,11 @@ namespace MonkeysTheoremWeb.Controllers
 
                 ga.Start();
 
-                return View("GeneticAlgorithm", model);
+                return View("Index", model);
             }
             else
             {
-                return View("GeneticAlgorithm", model);
+                return View("Index", model);
             }
         }
 

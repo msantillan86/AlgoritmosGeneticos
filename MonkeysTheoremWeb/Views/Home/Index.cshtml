@@ -14,7 +14,7 @@
                         <br /><br />
                         <div class="group">
                             <label for="user" class="label">Frase a reconstruir</label>
-                            <input id="user" type="text" class="input" placeholder="Ingrese su frase">
+                            <input id="user" type="text" class="input" placeholder="Ingrese una frase a reproducir">
                         </div>
                         @*<div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>*@
                         <div class="group">
@@ -23,42 +23,54 @@
                         <div class="hr"></div>
                         <div class="group">
                             <label for="pass" class="label">Frase Reconstruida</label>
-                            <input id="pass" type="password" class="input" placeholder="Aquí aparecerá su frase">
-                        </div>
+                            <select id="pass" type="text" class="select">
+                                <option value="0" selected>Aquí aparecerá su frase</option>
+                            </select>
+                            </div>
 
-                    </div>
+                        </div>
                     <div class="sign-up-form">
                         <br /><br />
                               <form asp-action="Calculate">
                                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                   <div class="group">
-                                      <label for="user" asp-for="Phrase" class="label">Phrase</label>
-                                      <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Phrase">
+                                      <label for="user" asp-for="Phrase" class="label">Frase</label>
+                                      <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
                                       <span asp-validation-for="Phrase" class="text-danger"></span>
                                   </div>
                                   <br />
                                   <div class="group">
                                       <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-validation-for="Population" style="width:260px" class="label">Population</label>
-                                          <input id="pass" asp-for="Population" style="width:260px" type="text" class="input chico" placeholder="Population">
+                                          <label for="pass" asp-validation-for="Population" class="label chico">Población</label>
+                                          <input id="pass" asp-for="Population" value="200" type="text" class="input chico" placeholder="Ingrese la Población">
                                           <span asp-validation-for="Population" class="text-danger"></span>
                                       </div>
                                       <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-for="Generations" style="width:260px" class="label">Generations</label>
-                                          <input id="pass" asp-for="Generations" style="width:260px" type="text" class="input chico" placeholder="Generations">
+                                          <label for="pass" asp-for="Generations" class="label chico">Generaciones a generar</label>
+                                          <input id="pass" asp-for="Generations" value="200" type="text" class="input chico" placeholder="Ingrese las Generaciones maximas a generar">
                                           <span asp-validation-for="Generations" class="text-danger"></span>
                                       </div>
                                       <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-for="MutationProbability" style="width:260px" class="label">MutationProbability</label>
-                                          <input id="pass" asp-for="MutationProbability" style="width:260px" type="text" class="input" placeholder="MutationProbability">
-                                          <span asp-validation-for="MutationProbability" class="text-danger"></span>
-                                      </div>
-                                      <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-for="SolverSelection" style="width:260px" class="label">SolverSelection</label>
-                                          <input id="pass" asp-for="SolverSelection" style="width:260px" type="text" class="input" placeholder="SolverSelection">
+                                          <label for="pass" asp-for="SolverSelection" class="label chico">Selección de solucionador</label>
+                                           <select id="pass" asp-for="SolverSelection" type="text" class="select chico" placeholder="Selección de solucionador">
+                                                <option value="0" selected>Ranking</option>
+                                                <option value="1">Torneo</option>
+                                                <option value="2">Ruleta</option>
+                                                <option value="3">Control sobre número esperado</option>
+                                           </select>
                                           <span asp-validation-for="SolverSelection" class="text-danger"></span>
                                       </div>
-                                  </div>
+                                          <div class="group" style="display:inline-block; margin-left:20px">
+                                              <label for="pass" asp-for="MutationProbability" class="label chico">Probabilidad de cruzamiento</label>
+                                              <input id="pass" asp-for="MutationProbability" value="0,8" type="text" class="input chico" placeholder="Ingrese la Probabilidad de cruzamiento">
+                                              <span asp-validation-for="MutationProbability" class="text-danger"></span>
+                                          </div>
+                                          <div class="group" style="display:inline-block; margin-left:20px">
+                                              <label for="pass" asp-for="MutationProbability" class="label chico">Probabilidad de cruzamiento</label>
+                                              <input id="pass" asp-for="MutationProbability" value="0,8" type="text" class="input chico" placeholder="Ingrese la Probabilidad de cruzamiento">
+                                              <span asp-validation-for="MutationProbability" class="text-danger"></span>
+                                          </div>
+                                      </div>
                                   <div class="group">
                                       <input type="submit" class="button" value="Reconstruir">
                                   </div>
@@ -67,7 +79,9 @@
                         <hr style="background:rgba(255, 255, 255, .2)"/>
                         <div class="group">
                             <label for="pass" class="label">Frase Reconstruida</label>
-                            <input id="pass" type="text" class="input" placeholder="Aquí aparecerá su frase">
+                            <select id="pass" type="text" class="select">
+                                <option value="0" selected>Aquí aparecerá su frase</option>
+                            </select>
                         </div>
 
                     </div>
