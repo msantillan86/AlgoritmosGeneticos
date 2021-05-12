@@ -54,6 +54,7 @@ namespace MonkeysTheoremWeb.Controllers
                 };
 
                 var ga = new MonkeySolver().GetGeneticAlgorithm(model.Phrase, parameters);
+                List<ResultAlgorithmViewModel> Result = new List<ResultAlgorithmViewModel>();
 
                 ga.GenerationRan += (sender, e) =>
                 {
@@ -61,10 +62,20 @@ namespace MonkeysTheoremWeb.Controllers
                     var bestFitness = bestChromosome.Fitness.Value;
 
                     var currentPhrase = new string(bestChromosome.GetGenes().Select(x => (char)x.Value).ToArray());
+
+                    ResultAlgorithmViewModel elemResult = new ResultAlgorithmViewModel
+                    {
+                        PhraseResult = currentPhrase,
+                        Generation = ga.GenerationsNumber,
+                        Fitness = bestFitness
+                    };
+
+                    Result.Add(elemResult);
                 };
 
                 ga.Start();
 
+                model.Result = Result;
                 return View("Index", model);
             }
             else

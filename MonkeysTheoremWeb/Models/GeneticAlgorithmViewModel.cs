@@ -21,5 +21,6 @@ namespace MonkeysTheoremWeb.Models
         public float MutationProbability { get; set; }
         [DisplayName("Método de selección")]
         public int SolverSelection { get; set; }
+        public List<ResultAlgorithmViewModel> Result { get; set; }
     }
 }
