@@ -5,8 +5,10 @@ using GeneticSharp.Domain.Selections;
 using GeneticSharp.Domain.Terminations;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MonkeysAG
@@ -15,6 +17,9 @@ namespace MonkeysAG
     {
         public GeneticAlgorithm GetGeneticAlgorithm(string frase, MonkeyParameters parameters)
         {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("es-AR");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
             SelectionBase selection = parameters.Selection switch
             {
                 MonkeyParameters.SolverSelection.Elite => new EliteSelection(),
