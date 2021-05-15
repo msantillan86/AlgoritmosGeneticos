@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="group" style="display:inline-block; margin-left:20px">
                                     <label asp-for="CrossoverProbability" class="label chico">Probabilidad de cruzamiento</label>
-                                    <input asp-for="CrossoverProbability" value="@Model.CrossoverProbability" type="text" class="input chico" placeholder="Probabilidad de cruzamiento">
+                                    <input asp-for="CrossoverProbability" value="@(Model.CrossoverProbability + 0.1f)" type="text" class="input chico" placeholder="Probabilidad de cruzamiento">
                                     <span asp-validation-for="CrossoverProbability" class="text-danger"></span>
                                 </div>
                                 <div class="group" style="display:inline-block; margin-left:20px">
