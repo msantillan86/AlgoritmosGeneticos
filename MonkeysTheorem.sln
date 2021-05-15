@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonkeysAG", "MonkeysAG\Monk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonkeysTheoremWeb", "MonkeysTheoremWeb\MonkeysTheoremWeb.csproj", "{B2F9C377-77A9-4D3C-9742-E62A6BDB3136}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeysBlazor", "MonkeysBlazor\MonkeysBlazor.csproj", "{4C3AF24C-D4DD-4B66-8F3E-7D6C48F54F15}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{B2F9C377-77A9-4D3C-9742-E62A6BDB3136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F9C377-77A9-4D3C-9742-E62A6BDB3136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F9C377-77A9-4D3C-9742-E62A6BDB3136}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C3AF24C-D4DD-4B66-8F3E-7D6C48F54F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C3AF24C-D4DD-4B66-8F3E-7D6C48F54F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C3AF24C-D4DD-4B66-8F3E-7D6C48F54F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C3AF24C-D4DD-4B66-8F3E-7D6C48F54F15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
