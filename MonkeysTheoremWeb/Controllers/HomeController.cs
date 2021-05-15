@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using MonkeysAG;
 using MonkeysTheoremWeb.Models;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using static MonkeysAG.MonkeyParameters;
 
 namespace MonkeysTheoremWeb.Controllers
@@ -71,7 +67,7 @@ namespace MonkeysTheoremWeb.Controllers
 
         private static void CalculateGeneticAlgorithm(GeneticAlgorithmViewModel model)
         {
-            CultureInfo  culture = CultureInfo.CreateSpecificCulture("es-AR");
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("es-AR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
@@ -123,7 +119,8 @@ namespace MonkeysTheoremWeb.Controllers
         private string ObtenerNombreEnum(int solverSelection)
         {
             string name = string.Empty;
-            switch ((SolverSelection)solverSelection) {
+            switch ((SolverSelection)solverSelection)
+            {
                 case SolverSelection.Tournament:
                     name = "Torneo";
                     break;
