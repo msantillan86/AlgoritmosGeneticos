@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monkeys.Console", "ConsoleApp1\Monkeys.Console.csproj", "{7533E0F0-B679-47CD-9B14-159B85BE6D5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monkeys.Console", "MonkeysConsole\Monkeys.Console.csproj", "{7533E0F0-B679-47CD-9B14-159B85BE6D5E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonkeysAG", "MonkeysAG\MonkeysAG.csproj", "{EF7AD67D-BDCD-4479-A352-5160E1D5DBF8}"
 EndProject
