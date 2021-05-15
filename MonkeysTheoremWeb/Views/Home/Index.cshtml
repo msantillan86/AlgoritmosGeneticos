@@ -13,80 +13,88 @@
                     <div class="login">
                         <br /><br />
                         <div class="group">
-                            <label for="user" class="label">Frase a reconstruir</label>
-                            <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
+                            <label class="label">Frase a reconstruir</label>
+                            <input asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
+                        </div>
+                        <div class="group parametros">
+                            <span>Población: @Model.Population</span>
+                            <span>Generaciones: @Model.Generations</span>
+                            <span>Solucionador: @Model.SolverSelectionName</span>
+                        </div>
+                        <div class="group parametros">
+                            <span>Probabilidad de Cruzamiento: @Model.CrossoverProbability</span>
+                            <span>Probabilidad de Mutación: @Model.MutationProbability</span>
                         </div>
                         <div class="group">
-                            <input type="submit" class="button" value="Reconstruir">
+                            <input id="btnReconstruirFrase" type="button" class="button" value="Reconstruir">
                         </div>
                         <div class="hr"></div>
                         <div class="group">
-                            <label for="pass" class="label">Frase Reconstruida</label>
-                            <select id="pass" type="text" class="select">
+                            <label for="phrase" class="label">Frase Reconstruida</label>
+                            <select id="results" type="text" class="select">
                                 @if (Model != null)
                                 {
-                                    for(int i = Model.Result.Count(); i != 0; i--)
+                                    for (int i = Model.Result.Count(); i != 0; i--)
                                     {
-                                        var elem = Model.Result[i-1];
+                                        var elem = Model.Result[i - 1];
                                         <option value="0">@string.Format("Frase: {0} - Generaciones: {1} - Fitness: {2}", elem.PhraseResult, elem.Generation, elem.Fitness)</option>
                                     }
                                 }
                                 else
                                 {
-                                   <option value="0" selected>Aquí aparecerá su frase</option>
+                                    <option value="0" selected>Aquí aparecerá su frase</option>
                                 }
                             </select>
                         </div>
-
-                        </div>
+                    </div>
                     <div class="sign-up-form">
                         <br /><br />
-                              <form asp-action="Calculate">
-                                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                  <div class="group">
-                                      <label for="user" asp-for="Phrase" class="label">Frase</label>
-                                      <input id="user" asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
-                                      <span asp-validation-for="Phrase" class="text-danger"></span>
-                                  </div>
-                                  <br />
-                                  <div class="group">
-                                      <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-validation-for="Population" class="label chico">Población</label>
-                                          <input id="pass" asp-for="Population" value="200" type="text" class="input chico" placeholder="Ingrese la Población">
-                                          <span asp-validation-for="Population" class="text-danger"></span>
-                                      </div>
-                                      <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-for="Generations" class="label chico">Generaciones a generar</label>
-                                          <input id="pass" asp-for="Generations" value="200" type="text" class="input chico" placeholder="Ingrese las Generaciones maximas a generar">
-                                          <span asp-validation-for="Generations" class="text-danger"></span>
-                                      </div>
-                                      <div class="group" style="display:inline-block; margin-left:20px">
-                                          <label for="pass" asp-for="SolverSelection" class="label chico">Selección de solucionador</label>
-                                           <select id="pass" asp-for="SolverSelection" type="text" class="select chico" placeholder="Selección de solucionador">
-                                                <option value="0" selected>Ranking</option>
-                                                <option value="1">Torneo</option>
-                                                <option value="2">Ruleta</option>
-                                                <option value="3">Control sobre número esperado</option>
-                                           </select>
-                                          <span asp-validation-for="SolverSelection" class="text-danger"></span>
-                                      </div>
-                                          <div class="group" style="display:inline-block; margin-left:20px">
-                                              <label for="pass" asp-for="CrossoverProbability" class="label chico">Probabilidad de cruzamiento</label>
-                                              <input id="pass" asp-for="CrossoverProbability" value="0,8" type="text" class="input chico" placeholder="Probabilidad de cruzamiento">
-                                              <span asp-validation-for="CrossoverProbability" class="text-danger"></span>
-                                          </div>
-                                          <div class="group" style="display:inline-block; margin-left:20px">
-                                              <label for="pass" asp-for="MutationProbability" class="label chico">Probabilidad de Mutación</label>
-                                              <input id="pass" asp-for="MutationProbability" value="0,8" type="text" class="input chico" placeholder="Probabilidad de mutación">
-                                              <span asp-validation-for="MutationProbability" class="text-danger"></span>
-                                          </div>
-                                      </div>
-                                  <div class="group">
-                                      <input type="submit" class="button" value="Reconstruir">
-                                  </div>
-                              </form>
+                        <form>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="group">
+                                <label asp-for="PhraseConfiguration" class="label">Frase</label>
+                                <input asp-for="PhraseConfiguration" type="text" class="input" placeholder="Ingrese una frase a reproducir">
+                                <span asp-validation-for="PhraseConfiguration" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="group">
+                                <div class="group" style="display:inline-block; margin-left:20px">
+                                    <label asp-validation-for="Population" class="label chico">Población</label>
+                                    <input asp-for="Population" value="200" type="text" class="input chico" placeholder="Ingrese la Población">
+                                    <span asp-validation-for="Population" class="text-danger"></span>
+                                </div>
+                                <div class="group" style="display:inline-block; margin-left:20px">
+                                    <label asp-for="Generations" class="label chico">Generaciones a generar</label>
+                                    <input asp-for="Generations" value="200" type="text" class="input chico" placeholder="Ingrese las Generaciones maximas a generar">
+                                    <span asp-validation-for="Generations" class="text-danger"></span>
+                                </div>
+                                <div class="group" style="display:inline-block; margin-left:20px">
+                                    <label asp-for="SolverSelection" class="label chico">Selección de solucionador</label>
+                                    <select asp-for="SolverSelection" type="text" class="select chico" placeholder="Selección de solucionador">
+                                        <option value="0" selected>Ranking</option>
+                                        <option value="1">Torneo</option>
+                                        <option value="2">Ruleta</option>
+                                        <option value="3">Control sobre número esperado</option>
+                                    </select>
+                                    <span asp-validation-for="SolverSelection" class="text-danger"></span>
+                                </div>
+                                <div class="group" style="display:inline-block; margin-left:20px">
+                                    <label asp-for="CrossoverProbability" class="label chico">Probabilidad de cruzamiento</label>
+                                    <input asp-for="CrossoverProbability" value="0,8" type="text" class="input chico" placeholder="Probabilidad de cruzamiento">
+                                    <span asp-validation-for="CrossoverProbability" class="text-danger"></span>
+                                </div>
+                                <div class="group" style="display:inline-block; margin-left:20px">
+                                    <label asp-for="MutationProbability" class="label chico">Probabilidad de Mutación</label>
+                                    <input asp-for="MutationProbability" value="0,8" type="text" class="input chico" placeholder="Probabilidad de mutación">
+                                    <span asp-validation-for="MutationProbability" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <input id="btnReconstruirConfiguracion" type="button" class="button" value="Reconstruir">
+                            </div>
+                        </form>
 
-                        <hr style="background:rgba(255, 255, 255, .2)"/>
+                        <!--<hr style="background:rgba(255, 255, 255, .2)"/>
                         <div class="group">
                             <label for="pass" class="label">Frase Reconstruida</label>
                             <select id="pass" type="text" class="select">
@@ -103,7 +111,7 @@
                                     <option value="0" selected>Aquí aparecerá su frase</option>
                                 }
                             </select>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
@@ -112,3 +120,60 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+    $("#btnReconstruirFrase").click(function (e) {
+        $("#PhraseConfiguration").val($("#Phrase").val());
+        calculate(e.target);
+    });
+
+    $("#btnReconstruirConfiguracion").click(function (e) {
+        $("#Phrase").val($("#PhraseConfiguration").val());
+        calculate(e.target);
+    });
+
+    function calculate(selector) {
+
+        var data = {
+            'Phrase': $("#Phrase").val(),
+            'Population': $("#Population").val(),
+            'Generations': $("#Generations").val(),
+            'CrossoverProbability': $("#CrossoverProbability").val(),
+            'MutationProbability': $("#MutationProbability").val(),
+            'SolverSelection': $("#SolverSelection").val(),
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Calculate", "Home")',
+            data: data,
+            success: function (data) {
+                if (data.codigo == 0) {
+                    var options = "";
+                    data.resultados = data.resultados.reverse();
+                    $.each(data.resultados, function (i, item) {
+                        var option = "<option value='" + i + "'>" + `Frase: ${item.phraseResult} - Generaciones: ${item.generation} - Fitness: ${item.fitness}` + "</option>";
+                        options += option;
+                    });
+                    $("#results").empty();
+                    $("#results").append(options);
+
+                    console.log(selector.id);
+                    if (selector.id == "btnReconstruirConfiguracion") {
+                        $("#tab-1").click();
+                    }
+                }
+                else {
+                    var errores = "";
+                    $.each(data.resultados, function (i, err) {
+                        errores += err + "\n";
+                    });
+                    $.notify(errores, "error");
+                    if (selector == "btnReconstruirFrase") {
+                        $("#tab-2").click();
+                    }
+                }
+            },
+        });
+    }
+
+</script>

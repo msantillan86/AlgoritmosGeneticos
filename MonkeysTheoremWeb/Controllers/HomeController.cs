@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using MonkeysAG;
@@ -23,7 +24,9 @@ namespace MonkeysTheoremWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            GeneticAlgorithmViewModel model = new GeneticAlgorithmViewModel();
+            LoadDefaultParams(model);
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -33,7 +36,6 @@ namespace MonkeysTheoremWeb.Controllers
 
         public IActionResult GeneticAlgorithm(GeneticAlgorithmViewModel model)
         {
-            ViewBag.SelectionMethods = LoadSelectionMethods();
             if (model == null)
                 model = new GeneticAlgorithmViewModel();
 
@@ -44,43 +46,13 @@ namespace MonkeysTheoremWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var parameters = new MonkeyParameters()
-                {
-                    Population = model.Population,
-                    Generations = model.Generations,
-                    CrossoverProbability = model.CrossoverProbability,
-                    MutationProbability = model.MutationProbability,
-                    Selection = (SolverSelection) model.SolverSelection
-                };
-
-                var ga = new MonkeySolver().GetGeneticAlgorithm(model.Phrase, parameters);
-                List<ResultAlgorithmViewModel> Result = new List<ResultAlgorithmViewModel>();
-
-                ga.GenerationRan += (sender, e) =>
-                {
-                    var bestChromosome = ga.BestChromosome as MonkeyChromosome;
-                    var bestFitness = bestChromosome.Fitness.Value;
-
-                    var currentPhrase = new string(bestChromosome.GetGenes().Select(x => (char)x.Value).ToArray());
-
-                    ResultAlgorithmViewModel elemResult = new ResultAlgorithmViewModel
-                    {
-                        PhraseResult = currentPhrase,
-                        Generation = ga.GenerationsNumber,
-                        Fitness = bestFitness
-                    };
-
-                    Result.Add(elemResult);
-                };
-
-                ga.Start();
-
-                model.Result = Result;
-                return View("Index", model);
+                CalculateGeneticAlgorithm(model);
+                return Json(new { codigo = 0, resultados = model.Result });
             }
             else
             {
-                return View("Index", model);
+                IEnumerable<string> allErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { codigo = -1, resultados = allErrors });
             }
         }
 
@@ -95,18 +67,72 @@ namespace MonkeysTheoremWeb.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private dynamic LoadSelectionMethods()
+        private static void CalculateGeneticAlgorithm(GeneticAlgorithmViewModel model)
         {
-            Array values = Enum.GetValues(typeof(SolverSelection));
-            IList<SelectListItem> methods = new List<SelectListItem>();
-            int i = 0;
-            foreach (SolverSelection val in values)
+            var parameters = new MonkeyParameters()
             {
-                methods.Add(new SelectListItem() { Text = Enum.GetName(typeof(SolverSelection), val), Value = i.ToString() });
-                i++;
-            }
+                Population = model.Population.Value,
+                Generations = model.Generations.Value,
+                CrossoverProbability = model.CrossoverProbability.Value,
+                MutationProbability = model.MutationProbability.Value,
+                Selection = (SolverSelection)model.SolverSelection
+            };
 
-            return methods;
+            var ga = new MonkeySolver().GetGeneticAlgorithm(model.Phrase, parameters);
+            List<ResultAlgorithmViewModel> Result = new List<ResultAlgorithmViewModel>();
+
+            ga.GenerationRan += (sender, e) =>
+            {
+                var bestChromosome = ga.BestChromosome as MonkeyChromosome;
+                var bestFitness = bestChromosome.Fitness.Value;
+
+                var currentPhrase = new string(bestChromosome.GetGenes().Select(x => (char)x.Value).ToArray());
+
+                ResultAlgorithmViewModel elemResult = new ResultAlgorithmViewModel
+                {
+                    PhraseResult = currentPhrase,
+                    Generation = ga.GenerationsNumber,
+                    Fitness = bestFitness
+                };
+
+                Result.Add(elemResult);
+            };
+
+            ga.Start();
+
+            model.Result = Result;
+        }
+
+
+        private void LoadDefaultParams(GeneticAlgorithmViewModel model)
+        {
+            model.Population = 200;
+            model.Generations = 200;
+            model.SolverSelection = (int)SolverSelection.Tournament;
+            model.SolverSelectionName = ObtenerNombreEnum(model.SolverSelection);
+            model.MutationProbability = 0.8f;
+            model.CrossoverProbability = 0.8f;
+        }
+
+        private string ObtenerNombreEnum(int solverSelection)
+        {
+            string name = string.Empty;
+            switch ((SolverSelection)solverSelection) {
+                case SolverSelection.Tournament:
+                    name = "Torneo";
+                    break;
+                case SolverSelection.Elite:
+                    name = "Élite";
+                    break;
+                case SolverSelection.Roulette:
+                    name = "Ruleta";
+                    break;
+                case SolverSelection.StochasticUniversalSampling:
+                    name = "Control sobre número esperado";
+                    break;
+
+            }
+            return name;
         }
     }
 }
