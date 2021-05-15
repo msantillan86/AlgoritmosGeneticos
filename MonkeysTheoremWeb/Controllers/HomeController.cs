@@ -7,7 +7,9 @@ using MonkeysTheoremWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static MonkeysAG.MonkeyParameters;
 
@@ -69,6 +71,10 @@ namespace MonkeysTheoremWeb.Controllers
 
         private static void CalculateGeneticAlgorithm(GeneticAlgorithmViewModel model)
         {
+            CultureInfo  culture = CultureInfo.CreateSpecificCulture("es-AR");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
             var parameters = new MonkeyParameters()
             {
                 Population = model.Population.Value,

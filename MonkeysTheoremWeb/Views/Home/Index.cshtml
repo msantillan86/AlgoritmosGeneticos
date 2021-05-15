@@ -14,16 +14,16 @@
                         <br /><br />
                         <div class="group">
                             <label class="label">Frase a reconstruir</label>
-                            <input asp-for="Phrase" type="text" class="input" placeholder="Ingrese una frase a reproducir">
+                            <input asp-for="Phrase" type="text" class="input" value="@Model.Phrase" placeholder="Ingrese una frase a reproducir">
                         </div>
-                        <div class="group parametros">
-                            <span>Población: @Model.Population</span>
-                            <span>Generaciones: @Model.Generations</span>
-                            <span>Solucionador: @Model.SolverSelectionName</span>
-                        </div>
-                        <div class="group parametros">
-                            <span>Probabilidad de Cruzamiento: @Model.CrossoverProbability</span>
-                            <span>Probabilidad de Mutación: @Model.MutationProbability</span>
+                        <div class="group">
+                            <ul style="display: inline-block;text-align: left; background: rgba(255, 255, 255, .1);background-color: rgba(255, 255, 255, .1);border-radius: 10px;color: #aaab;">
+                                <li style="margin:10px"><label id="lblHome_Population">Población: @Model.Population</label></li>
+                                <li style="margin:10px"><label id="lblHome_Generations">Generaciones: @Model.Generations</label></li>
+                                <li style="margin:10px"><label id="lblHome_SolverSelection">Solucionador: @Model.SolverSelectionName</label></li>
+                                <li style="margin:10px"><label id="lblHome_CrossoverProbability">Probabilidad de Cruzamiento: @Model.CrossoverProbability</label></li>
+                                <li style="margin:10px"><label id="lblHome_MutationProbability">Probabilidad de Mutación: @Model.MutationProbability</label></li>
+                            </ul>
                         </div>
                         <div class="group">
                             <input id="btnReconstruirFrase" type="button" class="button" value="Reconstruir">
@@ -52,7 +52,7 @@
                         <form>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="group">
-                                <label asp-for="PhraseConfiguration" class="label">Frase</label>
+                                <label asp-for="PhraseConfiguration" class="label">Frase a reconstruir</label>
                                 <input asp-for="PhraseConfiguration" type="text" class="input" placeholder="Ingrese una frase a reproducir">
                                 <span asp-validation-for="PhraseConfiguration" class="text-danger"></span>
                             </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="group" style="display:inline-block; margin-left:20px">
                                     <label asp-for="SolverSelection" class="label chico">Selección de solucionador</label>
-                                    <select asp-for="SolverSelection" type="text" class="select chico" placeholder="Selección de solucionador">
+                                    <select asp-for="SolverSelection" type="text"  class="select chico" placeholder="Selección de solucionador">
                                         <option value="0" selected>Ranking</option>
                                         <option value="1">Torneo</option>
                                         <option value="2">Ruleta</option>
@@ -123,15 +123,40 @@
 <script type="text/javascript">
 
     $("#btnReconstruirFrase").click(function (e) {
-        $("#PhraseConfiguration").val($("#Phrase").val());
         calculate(e.target);
     });
 
     $("#btnReconstruirConfiguracion").click(function (e) {
-        $("#Phrase").val($("#PhraseConfiguration").val());
         calculate(e.target);
     });
 
+    $("#Phrase").change(function (e) {
+        $("#PhraseConfiguration").val($("#Phrase").val());
+    });
+
+    $("#PhraseConfiguration").change(function (e) {
+        $("#Phrase").val($("#PhraseConfiguration").val());
+    });
+
+    $("#Population").change(function (e) {
+        $("#lblHome_Population").text("Población: " + $("#Population").val());
+    });
+
+    $("#CrossoverProbability").change(function (e) {
+        $("#lblHome_CrossoverProbability").text("Probabilidad de Cruzamiento: " + $("#CrossoverProbability").val());
+    });
+
+    $("#Generations").change(function (e) {
+        $("#lblHome_Generations").text("Generaciones: " + $("#Generations").val());
+    });
+
+    $("#MutationProbability").change(function (e) {
+        $("#lblHome_MutationProbability").text("MutationProbability: " + $("#MutationProbability").val());
+    });
+    $("#SolverSelection").change(function (e) {
+        $("#lblHome_SolverSelection").text("SolverSelection: " + $("#SolverSelection option:selected").text());
+    });
+    
     function calculate(selector) {
 
         var data = {
