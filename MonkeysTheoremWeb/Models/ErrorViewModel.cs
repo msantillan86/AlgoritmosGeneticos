@@ -1,5 +1,3 @@
-using System;
-
 namespace MonkeysTheoremWeb.Models
 {
     public class ErrorViewModel
