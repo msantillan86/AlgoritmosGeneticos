@@ -7,7 +7,7 @@ namespace MonkeysAG
     {
         private int _length;
         private int _charLowerBound = 32;
-        private int _charUpperBound = 127;
+        private int _charUpperBound = 255;
 
         public MonkeyChromosome(int length) : base(length)
         {
