@@ -7,8 +7,7 @@ namespace MonkeysAG
     public class MonkeyChromosome : ChromosomeBase
     {
         private int _length;
-        private int _charLowerBound = 32;
-        private int _charUpperBound = 255;
+        private string validCharacters = "aábcdeéfghiíjklmnñoópqrstuúvwxyzAÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ,.|¡!#$%&/()=¿? ";
 
         public MonkeyChromosome(int length) : base(length)
         {
@@ -22,9 +21,8 @@ namespace MonkeysAG
 
         public override Gene GenerateGene(int geneIndex)
         {
-            int index = RandomizationProvider.Current.GetInt(_charLowerBound, _charUpperBound);
-
-            return new Gene((char)index);
+            int index = RandomizationProvider.Current.GetInt(0, validCharacters.Length);
+            return new Gene(validCharacters[index]);
         }
     }
 }

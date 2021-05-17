@@ -8,27 +8,34 @@ namespace MonkeysAG
 {
     public class MonkeyMutation : MutationBase
     {
-        private int _charLowerBound = 32;
-        private int _charUpperBound = 255;
-
         protected override void PerformMutate(IChromosome chromosome, float probability)
         {
-            if (RandomizationProvider.Current.GetDouble() <= probability)
+            try
             {
-                const int MaxMutationAmount = 10;
+                if (RandomizationProvider.Current.GetDouble() <= probability)
+                {
+                    //const int MaxMutationAmount = 10;
 
-                var index = RandomizationProvider.Current.GetInt(0, chromosome.Length);
+                    //var index = RandomizationProvider.Current.GetInt(0, chromosome.Length);
 
-                int currVal = (char)chromosome.GetGene(index).Value;
+                    //int currVal = (char)chromosome.GetGene(index).Value;
 
-                var newGene = currVal +
-                    RandomizationProvider.Current.GetInt(-MaxMutationAmount, MaxMutationAmount + 1);
+                    //var newGene = currVal + RandomizationProvider.Current.GetInt(-MaxMutationAmount, MaxMutationAmount + 1);
 
-                newGene = Math.Min(newGene, _charUpperBound);
-                newGene = Math.Max(newGene, _charLowerBound);
+                    //newGene = Math.Min(newGene, validCharacters.Length-1);
+                    //newGene = Math.Max(newGene, 0);
 
-                chromosome.ReplaceGene(index, new Gene((char)newGene));
+                    //chromosome.ReplaceGene(index, new Gene(validCharacters[newGene]));
+
+                    var index = RandomizationProvider.Current.GetInt(0, chromosome.Length);
+                    chromosome.ReplaceGene(index, chromosome.GenerateGene(index));
+                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }
