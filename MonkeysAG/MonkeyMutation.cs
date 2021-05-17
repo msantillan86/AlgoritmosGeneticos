@@ -8,7 +8,7 @@ namespace MonkeysAG
     public class MonkeyMutation : MutationBase
     {
         private int _charLowerBound = 32;
-        private int _charUpperBound = 255;
+        private int _charUpperBound = 165;
         protected override void PerformMutate(IChromosome chromosome, float probability)
         {
             if (RandomizationProvider.Current.GetDouble() <= probability)
