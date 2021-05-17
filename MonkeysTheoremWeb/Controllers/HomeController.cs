@@ -77,7 +77,8 @@ namespace MonkeysTheoremWeb.Controllers
                 Generations = model.Generations.Value,
                 CrossoverProbability = model.CrossoverProbability.Value,
                 MutationProbability = model.MutationProbability.Value,
-                Selection = (SolverSelection)model.SolverSelection
+                Selection = (SolverSelection)model.SolverSelection,
+                //ValidCharacters = ""
             };
 
             var ga = new MonkeySolver().GetGeneticAlgorithm(model.Phrase, parameters);
