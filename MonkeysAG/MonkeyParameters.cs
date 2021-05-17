@@ -14,5 +14,6 @@ namespace MonkeysAG
         public SolverSelection Selection { get; set; }
         public float CrossoverProbability { get; set; }
         public float MutationProbability { get; set; }
+        public string ValidCharacters { get; set; }
     }
 }

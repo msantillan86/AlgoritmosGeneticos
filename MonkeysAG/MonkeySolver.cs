@@ -31,7 +31,7 @@ namespace MonkeysAG
 
             var crossover = new UniformCrossover();
             var mutation = new MonkeyMutation();
-            var chromosome = new MonkeyChromosome(frase.Length);
+            var chromosome = new MonkeyChromosome(frase.Length, parameters.ValidCharacters);
             var population = new Population(parameters.Population, parameters.Population, chromosome);
             var fitness = new MonkeyFitness(frase);
 
