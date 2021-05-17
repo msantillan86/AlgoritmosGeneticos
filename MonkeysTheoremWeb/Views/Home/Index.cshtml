@@ -3,8 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="col-md-6 p-0" id="divGeneral">
-    <div class="card">
+<div class="col-md-6 p-0" >
+    <div id="datos" class="mt-5" style="position: absolute; z-index:1; width:100px">
+    </div>
+    <div class="card" id="divGeneral">
         <div class="login-box">
             <div class="login-snip">
                 <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Ingrese la Frase</label>
@@ -151,8 +153,8 @@
             url: '@Url.Action("Calculate", "Home")',
             data: data,
             beforeSend: function () {
-                $('#datos').html("<img src='img/spinnerMonkey.gif' />"); // Muestro el Spinner (Animación)
-                $('#divGeneral').css('filter', 'blur(6px)');
+                $('#datos').html("<img src='img/spinnerMonkey.gif'>"); // Muestro el Spinner (Animación)
+                $('#divGeneral').css('filter', 'blur(4px)');
             },
             success: function (data) {
                 if (data.codigo == 0) {
