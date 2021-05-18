@@ -135,7 +135,7 @@
     });
 
     $("#btnVerGrafico").click(function () {
-        const config = {
+        var config = {
             type: 'line',
             data: {
                 labels: generaciones_grafico,
@@ -152,8 +152,8 @@
         if (myChart != null) {
             myChart.destroy();
         }
-        myChart = new Chart($('#chart_grafico'), config);
 
+        myChart = new Chart($('#chart_grafico'), config);
         $("#modal_grafico").modal('show');
     });
 
@@ -207,9 +207,11 @@
                     $('#datos').html(""); // Muestro el Spinner (Animación)
                     $('#divGeneral').css('filter', '');
                     var options = "";
+                    datos_grafico = [];
+                    generaciones_grafico = [];
                     $.each(data.resultados, function (i, item) {
                         datos_grafico.push(item.fitness);
-                        generaciones_grafico.push(i + 1);
+                        generaciones_grafico.push(item.generation);
                     });
 
                     $("#btnVerGrafico").show();
