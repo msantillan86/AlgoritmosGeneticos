@@ -209,7 +209,7 @@
                     var options = "";
                     $.each(data.resultados, function (i, item) {
                         datos_grafico.push(item.fitness);
-                        generaciones_grafico.push(i.toString());
+                        generaciones_grafico.push(i + 1);
                     });
 
                     $("#btnVerGrafico").show();
