@@ -3,7 +3,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="col-md-6 p-0" >
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="col-md-6 p-0">
     <div id="datos" class="mt-5" style="position: absolute; z-index:1; width:100px">
     </div>
     <div class="card" id="divGeneral">
@@ -13,7 +15,7 @@
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Configurar</label>
                 <div class="login-space">
                     <div class="login">
-                        <br /><br />
+                        <br />
                         <div class="group">
                             <label class="label">Frase a reconstruir</label>
                             <input asp-for="Phrase" type="text" class="input" value="@Model.Phrase" placeholder="Ingrese una frase a reproducir">
@@ -29,6 +31,9 @@
                         </div>
                         <div class="group">
                             <input id="btnReconstruirFrase" type="button" class="button" value="Reconstruir">
+                        </div>
+                        <div class="group">
+                            <input id="btnVerGrafico" type="button" class="button" value="Ver Gráfico Fitness" style="display:none;" />
                         </div>
                         <div class="hr"></div>
                         <div class="group">
@@ -102,13 +107,54 @@
     </div>
 </div>
 
+<div id="modal_grafico" class="modal fade">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Comportamiento de la Función Fitness</h4>
+            </div>
+            <div class="modal-body">
+                <canvas id="chart_grafico"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
+
+    var datos_grafico = [];
+    var generaciones_grafico = [];
+    var myChart = null;
+
     $("#btnReconstruirFrase").click(function (e) {
         calculate(e.target);
     });
 
     $("#btnReconstruirConfiguracion").click(function (e) {
         calculate(e.target);
+    });
+
+    $("#btnVerGrafico").click(function () {
+        const config = {
+            type: 'line',
+            data: {
+                labels: generaciones_grafico,
+                datasets: [{
+                    label: 'Función Fitness',
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    data: datos_grafico,
+                    fill: true,
+                    tension: 0.1
+                }]
+            }
+        };
+        if (myChart != null) {
+            myChart.destroy();
+        }
+        myChart = new Chart($('#chart_grafico'), config);
+
+        $("#modal_grafico").modal('show');
     });
 
     $("#Phrase").change(function (e) {
@@ -161,6 +207,13 @@
                     $('#datos').html(""); // Muestro el Spinner (Animación)
                     $('#divGeneral').css('filter', '');
                     var options = "";
+                    $.each(data.resultados, function (i, item) {
+                        datos_grafico.push(item.fitness);
+                        generaciones_grafico.push(i.toString());
+                    });
+
+                    $("#btnVerGrafico").show();
+
                     data.resultados = data.resultados.reverse();
                     $.each(data.resultados, function (i, item) {
                         var option = "<option value='" + i + "'>" + `Frase: ${item.phraseResult} - Generaciones: ${item.generation} - Fitness: ${item.fitness}` + "</option>";
@@ -212,4 +265,5 @@
             },
         });
     }
+
 </script>
