@@ -7,7 +7,8 @@ namespace MonkeysAG
     public class MonkeyChromosome : ChromosomeBase
     {
         private int _length;
-        private string _validCharacters = "-_[]=+-&#/*@'\"aábcdeéfghiíjklmnñoópqrstuúvwxyzAÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ,.|¡!#$%&/()=¿? ";
+        //private string _validCharacters = "-_[]=+-&#/*@'\"aábcdeéfghiíjklmnñoópqrstuúvwxyzAÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ,.|¡!#$%&/()=¿? ";
+        private string _validCharacters = " ¡!\"/#$%&'()*+,-_./0123456789:;<=>¿?@AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚÜVWXYZaábcdeéfghiíjklmnñoópqrstuúüvwxyz[]^`{}ªº|¬çÇ·~";
 
         public MonkeyChromosome(int length, string validCharacters) : base(length)
         {
