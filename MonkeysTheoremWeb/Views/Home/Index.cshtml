@@ -39,7 +39,7 @@
                         <div class="group">
                             <label for="phrase" class="label">Frase Reconstruida</label>
                             <select id="results" type="text" class="select">
-                                @if (Model != null)
+                                @if (Model.Phrase != null)
                                 {
                                     for (int i = Model.Result.Count(); i != 0; i--)
                                     {
@@ -217,12 +217,14 @@
                     $("#btnVerGrafico").show();
 
                     data.resultados = data.resultados.reverse();
-                    $.each(data.resultados, function (i, item) {
-                        var option = "<option value='" + i + "'>" + `Frase: ${item.phraseResult} - Generaciones: ${item.generation} - Fitness: ${item.fitness}` + "</option>";
-                        options += option;
-                    });
                     $("#results").empty();
-                    $("#results").append(options);
+                    $.each(data.resultados, function (i, item) {
+                        var stringOption = `Frase: ${item.phraseResult} - Generaciones: ${item.generation} - Fitness: ${item.fitness}`;
+                        $('#results').append($('<option>', {
+                            value: i,
+                            text: stringOption
+                        }));
+                    });
 
                     if (selector.id == "btnReconstruirConfiguracion") {
                         $("#tab-1").click();
