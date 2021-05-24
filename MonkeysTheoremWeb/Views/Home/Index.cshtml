@@ -18,7 +18,7 @@
                         <br />
                         <div class="group">
                             <label class="label">Frase a reconstruir</label>
-                            <input asp-for="Phrase" type="text" class="input" value="@Model.Phrase" placeholder="Ingrese una frase a reproducir">
+                            <input asp-for="Phrase" type="text" class="input" value="@Model.Phrase" placeholder="Ingrese una frase a reproducir" maxlength="60">
                         </div>
                         <div class="group">
                             <ul style="display: inline-block;text-align: left; background: rgba(255, 255, 255, .1);background-color: rgba(255, 255, 255, .1);border-radius: 10px;color: #aaab;">
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="group">
-                                <input id="btnReconstruirConfiguracion" type="button" class="button" value="Reconstruir">
+                                <input id="btnReconstruirConfiguracion" type="button" class="button" value="Reconstruir" maxlength="60">
                             </div>
                         </form>
                     </div>
