@@ -15,7 +15,7 @@ namespace MonkeysTheoremWeb.Models
 
         [Required(ErrorMessage = "Debe ingresar la Población")]
         [DefaultValue(value: 200)]
-        [Range(1, Int32.MaxValue, ErrorMessage = "La población debe ser mayor a 0")]
+        [Range(2, Int32.MaxValue, ErrorMessage = "La población debe ser mayor o igual a 1")]
         [DisplayName("Población")]
         public int? Population { get; set; }
 
